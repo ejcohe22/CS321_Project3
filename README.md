@@ -1,2 +1,10 @@
-# CS321_Project3
-CI/CD practice, making a Heroku deployed Website.
+# CS321 Project 3
+_CI/CD practice, making a Heroku deployed Website._
+
+<<>> and Erik Cohen <<ejcohe22@colby.edu>>
+----
+
+
+----
+## Extensions:
+
