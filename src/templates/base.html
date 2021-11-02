@@ -16,11 +16,11 @@
     Active Notes
   </div>
     {% for note in notes %}
-      <div class = "row ml-4 mr-4 list-group-item">
-        <div class="col-md-8">{{note}}</div>
+      <form class = "row ml-4 mr-4 list-group-item" action = "/delete/{{loop.index0}}/" method = "post">
+        <div>{{note}}</div>
         <button type="button" class = "m-1 col-md-1 btn btn-outline-secondary float-right">Done</button>
-        <button type="button" class = "m-1 col-md-1 btn btn-outline-secondary float-right">Delete</button>
-      </div>
+        <button type="submit" class = "m-1 col-md-1 btn btn-outline-secondary float-right" >Delete</button>
+      </form>
     {% endfor %}
 </div>
 
