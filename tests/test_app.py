@@ -5,10 +5,6 @@ website_path = "https://cs321-project3-website.herokuapp.com/"
 
 
 def test_index():
-    assert index() == "hello, World!"
-
-
-def test_about():
 	client = app.test_client()
 	response = client.get("/index")
 	assert response.status_code == 200  # success
