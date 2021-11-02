@@ -1,5 +1,5 @@
 from src.app import *
-import requests
+from flask import requests
 
 
 website_path = "https://cs321-project3-website.herokuapp.com/"
