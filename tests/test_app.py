@@ -6,14 +6,14 @@ website_path = "https://cs321-project3-website.herokuapp.com/"
 
 def test_index():
 	client = app.test_client()
-	response = client.get("/index")
+	response = client.get(website_path + "/index")
 	assert response.status_code == 200  # success
 
 
 def test_add():
 	# creating a post request with data as if coming from form
 	client = app.test_client()
-	url = '/add'
+	url = website_path + '/add'
 	data = {'note1': 'New Note'}
 	response = client.post(url, data=data)
 	
