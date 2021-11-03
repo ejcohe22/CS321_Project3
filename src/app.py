@@ -10,7 +10,9 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     user = {'username' : 'Aidan' }
-    return render_template("base.html", title="home", user=user, notes = notes, timeObj = datetime.datetime - datetime.timedelta(hours=4))
+    time = datetime.datetime.now() - datetime.timedelta(hours=4)
+    time = time.strftime("%B %d, %Y %I:%M %p")
+    return render_template("base.html", title="home", user=user, notes = notes, time = time)
 
 
 @app.route("/add", methods=["POST"])
