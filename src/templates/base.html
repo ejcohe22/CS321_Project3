@@ -25,13 +25,21 @@
     Active Notes
   </div>
     {% for note in notes %}
-      <form class = "row ml-4 mr-4 list-group-item" action = "/delete/{{loop.index0}}/" method = "post">
-        <div>{{note.get_data()}}</div>
-        <div>{{note.get_priority()}}</div>
-        <div>{{note.get_tag()}}</div>
+    {% if note.get_priority() == "High" %}
+      <form class = "row ml-4 mr-4 list-group-item bg-danger" action = "/delete/{{loop.index0}}/" method = "post">
+    {% elif note.get_priority() == "Medium" %}
+      <form class = "row ml-4 mr-4 list-group-item bg-warning" action = "/delete/{{loop.index0}}/" method = "post">
+    {% else %}
+      <form class = "row ml-4 mr-4 list-group-item bg-success" action = "/delete/{{loop.index0}}/" method = "post">
+    {% endif %}
         <div>{{note.get_time()}}</div>
-        <button type="button" class = "m-1 col-md-1 btn btn-outline-secondary float-right">Done</button>
-        <button type="submit" class = "m-1 col-md-1 btn btn-outline-secondary float-right" >Delete</button>
+        <div>-------------------------</div>
+        <div>{{note.get_data()}}</div>
+        <div>-------------------------</div>
+        <div>Priority: {{note.get_priority()}}</div>
+        <div>Tag: {{note.get_tag()}}</div>
+        <button type="button" class = "m-1 col-md-1 btn btn-outline-light float-right">Done</button>
+        <button type="submit" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
       </form>
     {% endfor %}
 </div>
