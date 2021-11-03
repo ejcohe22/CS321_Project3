@@ -2,6 +2,7 @@
 
 <nav class="navbar navbar-light bg-light">
     <span class="navbar-brand mb-0 h1">Note Taking App</span>
+    <div>{{timeObj.now().strftime("%B %d, %Y %I:%M:%S %p")}}</div>
   </nav>
   
 <form class="input-group mb-3 m-4 pr-5" action="/add" method="post">
@@ -9,6 +10,13 @@
       <button class="btn btn-outline-secondary" type="submit">Add</button>
     </div>
     <input type="text" name = "Note" placeholder="Add a Note" class="form-control">
+
+    <input type="radio" id="High" name="Priority" value="High">
+    <label for="High">High</label><br>
+    <input type="radio" id="Medium" name="Priority" value="Medium">
+    <label for="Medium">Medium</label><br>
+    <input type="radio" id="Low" name="Priority" value="Low">
+    <label for="Low">Low</label>
 </form>
 
 <div class="list-group">
@@ -17,7 +25,10 @@
   </div>
     {% for note in notes %}
       <form class = "row ml-4 mr-4 list-group-item" action = "/delete/{{loop.index0}}/" method = "post">
-        <div>{{note}}</div>
+        <div>{{note.get_data()}}</div>
+        <div>{{note.get_priority()}}</div>
+        <div>{{note.get_tag()}}</div>
+        <div>{{note.get_time()}}</div>
         <button type="button" class = "m-1 col-md-1 btn btn-outline-secondary float-right">Done</button>
         <button type="submit" class = "m-1 col-md-1 btn btn-outline-secondary float-right" >Delete</button>
       </form>

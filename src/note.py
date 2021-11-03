@@ -7,7 +7,7 @@ class Note:
     def __init__(self, data, priority, tag):
         self.done = False
         self.data = data
-        self.time = datetime.datetime.now()
+        self.day_time = datetime.datetime.now()
         self.priority = priority
         self.tag = tag
     
@@ -29,7 +29,10 @@ class Note:
 
 
     def get_priority(self):
-        return self.priority
+        if self.priority is None:
+            return 
+        else:
+            return self.priority
 
 
     def set_priority(self, level):
@@ -37,7 +40,10 @@ class Note:
 
 
     def get_tag(self):
-        return self.tag
+        if self.tag is None:
+            return 
+        else:
+            return self.tag
 
 
     def set_tag(self, tag):
@@ -45,4 +51,6 @@ class Note:
 
 
     def get_time(self):
-        return f"{self.time.month}/{self.time.day}/{self.time.year} {self.time.hour}:{self.time.minute}:{self.time.second}"
+        return self.day_time.strftime("%B %d, %Y %I:%M:%S %p")
+
+
