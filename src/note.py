@@ -7,7 +7,7 @@ class Note:
     def __init__(self, data, priority, tag):
         self.done = False
         self.data = data
-        self.day_time = datetime.datetime.now()
+        self.day_time = datetime.datetime.now() - datetime.timedelta(hours=4)
         self.priority = priority
         self.tag = tag
     
