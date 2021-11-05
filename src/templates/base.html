@@ -32,15 +32,29 @@
     {% else %}
       <form class = "row ml-4 mr-4 list-group-item bg-success" action = "/delete/{{loop.index0}}/" method = "post">
     {% endif %}
-        <div>{{note.get_time()}}</div>
-        <div>-------------------------</div>
-        <div>{{note.get_data()}}</div>
-        <div>-------------------------</div>
-        <div>Priority: {{note.get_priority()}}</div>
-        <div>Tag: {{note.get_tag()}}</div>
+    <html>
+    <head></head>
+    <body>
+        <div style="width: 100%;">
+            <div style="width: 77%; height: 100px; float: left;"> 
+              <div>---------------------------------------------------------------------------------------------------------------------------</div>
+            </div>
+            <div style="margin-left: 77%; height: 100px;"> 
+              {{note.get_time()}}
+            </div>
+        </div>
+    </body>
+    </html>
+    <td class="align-top">{{note.get_data()}}</td>
+        <div>---------------------------------------------------------------------------------------------------------------------------</div>
+        <p class="text-right"> Priority: {{note.get_priority()}}</p>
+        <p class="text-right"> Tag: {{note.get_tag()}}</p>
         <button type="button" class = "m-1 col-md-1 btn btn-outline-light float-right">Done</button>
         <button type="submit" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
       </form>
     {% endfor %}
 </div>
+
+
+
 

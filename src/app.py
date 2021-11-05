@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, url_for, redirect
-from src.note import Note
+from flask import Flask, Response, render_template, request, url_for, redirect
+from note import Note
 import datetime
 
 
@@ -41,6 +41,7 @@ def delete(idx):
     print("Removing" + str(idx))
     notes.pop(idx)
     return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run()
