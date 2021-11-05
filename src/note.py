@@ -17,7 +17,7 @@ class Note:
 
 
     def set_data(self, data):
-        self.data - data
+        self.data = data
 
 
     def get_status(self):
@@ -30,7 +30,7 @@ class Note:
 
     def get_priority(self):
         if self.priority is None:
-            return 
+            return "low"
         else:
             return self.priority
 
@@ -52,5 +52,3 @@ class Note:
 
     def get_time(self):
         return self.day_time.strftime("%B %d, %Y %I:%M:%S %p")
-
-
