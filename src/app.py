@@ -18,7 +18,8 @@ def index():
 def add():
     new_note = request.form.get("Note")
     priority = request.form.get("Priority")
-    notes.append(Note(data = new_note, priority = priority, tag = None))
+    tag = request.form.get("Tag")
+    notes.append(Note(data = new_note, priority = priority, tag = tag))
 
     med_idx = 0
     low_idx = 0
