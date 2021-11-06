@@ -15,6 +15,15 @@
             margin:0;
       }
     </style>
+    <style>
+      a:link, a:visited {
+        color: white;
+      }
+      
+      a:hover, a:active {
+        color: rgb(88, 88, 88);
+      }
+      </style>
   </head>
 
     
@@ -26,7 +35,7 @@
 
 <form class="input-group mb-2 mx-5 my-1 pr-1" action="/add" method="post">
   <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary mt-2" type="submit">Add</button>
+    <button class="btn btn-outline-white bg-secondary mt-2" type="submit">Add</button>
   </div>
   <input type="text" name = "Note" placeholder="Add a Note" class="form-control col-md-7 mt-2">
   <input type="text" name = "Tag" placeholder="Add a Tag" class="form-control col-md-2 mt-2">
@@ -46,13 +55,13 @@
 </div>
   {% for note in notes %} <!---    action = "/done/{{loop.index0}}/"  -->
   {% if note.get_status() == True %}
-    <form class = "row ml-4 mr-4 list-group-item bg-secondary" action = "/delete/{{loop.index0}}/" method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-secondary" action = "/delete/{{loop.index0}}/" method = "post">
   {% elif note.get_priority() == "High" %}
-    <form class = "row ml-4 mr-4 list-group-item bg-danger" action = "/delete/{{loop.index0}}/"  method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-danger" action = "/delete/{{loop.index0}}/"  method = "post">
   {% elif note.get_priority() == "Medium" %}
-    <form class = "row ml-4 mr-4 list-group-item bg-warning" action = "/delete/{{loop.index0}}/" method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-warning" action = "/delete/{{loop.index0}}/" method = "post">
   {% else %}
-    <form class = "row ml-4 mr-4 list-group-item bg-success" action = "/delete/{{loop.index0}}/" method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-success" action = "/delete/{{loop.index0}}/" method = "post">
   {% endif %}
 </html>
 
@@ -61,36 +70,46 @@
       <head></head>
       <body>
           <div style="width: 100%;">
-              <div style="width: 77%; height: 30px; float: left;"> 
+              <div style="width: 68%; height: 30px; float: left;"> 
                 <div>-------------------------------------------------------------------------------------------------</div>
               </div>
-              <div style="margin-left: 77%; height: 30px;"> 
+              <div style="margin-left: 40%; height: 30px;"> 
                 {{note.get_time()}}
               </div>
           </div>
           <div style="width: 100%;">
-            <div style="width: 77%; height: 50px; float: left;"> 
+            <div style="width: 68%; height: 50px; float: left;"> 
               <div><td class="align-top">{{note.get_data()}}</td></div>
             </div>
-            <div style="margin-left: 50%; height: 30px;"> 
+            <div style="margin-left: 40%; height: 30px;"> 
               <p class="text-bottom"> Priority: {{note.get_priority()}}</p>
             </div>
         </div>
         <div style="width: 100%;">
-          <div style="width: 77%; height: 10px; float: left;"> 
+          <div style="width: 68%; height: 5px; float: left;"> 
             <div>-------------------------------------------------------------------------------------------------</div>
           </div>
-          <div style="margin-left: 50%; height: 10px;"> 
+          <div style="margin-left: 40%; height: 5px;"> 
             <p class="text-bottom"> Tag: {{note.get_tag()}}</p>
           </div>
       </div>
       </body>
       </html>
-          <button type="submit" class = "m-2 col-md-1 btn btn-outline-light float-right" action = "/done/{{loop.index0}}/">Done</button>
-          <button type="submit" class = "m-2 col-md-1 btn btn-outline-light float-right" >Delete</button>
+          <button type="submit" class = "m-1 col-md-1 btn btn-outline-light float-right" action = "/done/{{loop.index0}}/">Done</button>
+          <button type="submit" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>
       {% endfor %}
       <audio controls loop  id="playAudio">
         <source src= {{ url_for('static', filename = audio_file) }} type="audio/mp3">
         </audio>
+
+        
+
+        <div style="
+          margin-left: 0%; 
+          height: 10px; 
+          width: 360px;
+          word-wrap: normal;"> 
+          <a href="https://www.youtube.com/watch?v=lswHSnJ0Rlw">Debussy, Estampes (1903) - 1. Pagodes" performed by Claudio Arrau</a>
+          </div>
   </div>
