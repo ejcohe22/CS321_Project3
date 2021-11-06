@@ -36,19 +36,22 @@ def add():
     print(notes)
     return redirect(url_for("index"))
 
-@app.route("/delete/<int:idx>/", methods=["POST"])
+@app.route("/click/<int:idx>/", methods=["POST"])
 
-def delete(idx):
-    print("Removing " + str(idx))
-    #notes.pop(idx)
-    return redirect(url_for("index"))
+def click(idx):
+    #delete
+    if request.form["submit_button"] == "Delete":
+        print("Removing " + str(idx))
+        notes.pop(idx)
+        return redirect(url_for("index"))
+    #status
+    elif request.form["submit_button"] == "Done":
+        print("changing status " + str(idx))
+        notes[idx].set_status(not notes[idx].get_status())
+        return redirect(url_for("index"))
+    else:
+        return redirect(url_for("index"))
 
-@app.route("/done/<int:idx>/", methods=["POST"])
-
-def done(idx):
-    print("changing status " + str(idx))
-    notes[idx].set_status(not notes[idx].get_status())
-    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run()

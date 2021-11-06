@@ -55,13 +55,13 @@
 </div>
   {% for note in notes %} <!---    action = "/done/{{loop.index0}}/"  -->
   {% if note.get_status() == True %}
-    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-secondary" action = "/delete/{{loop.index0}}/" method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-secondary" action = "/click/{{loop.index0}}/" method = "post">
   {% elif note.get_priority() == "High" %}
-    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-danger" action = "/delete/{{loop.index0}}/"  method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-danger" action = "/click/{{loop.index0}}/"  method = "post">
   {% elif note.get_priority() == "Medium" %}
-    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-warning" action = "/delete/{{loop.index0}}/" method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-warning" action = "/click/{{loop.index0}}/" method = "post">
   {% else %}
-    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-success" action = "/delete/{{loop.index0}}/" method = "post">
+    <form class = "row ml-4 mr-4 my-0 py-0 list-group-item bg-success" action = "/click/{{loop.index0}}/" method = "post">
   {% endif %}
 </html>
 
@@ -95,8 +95,8 @@
       </div>
       </body>
       </html>
-          <button type="submit" class = "m-1 col-md-1 btn btn-outline-light float-right" action = "/done/{{loop.index0}}/">Done</button>
-          <button type="submit" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
+          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Done</button>
+          <button type="submit" name="submit_button" value="Delete" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>
       {% endfor %}
       <audio controls loop  id="playAudio">
