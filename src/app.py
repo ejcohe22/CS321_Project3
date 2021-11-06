@@ -3,6 +3,9 @@ from note import Note
 import datetime
 
 
+global priority_level
+global notes
+priority_level = {"High":2, "Medium":1, "Low":0, None:0}
 notes = []
 
 app = Flask(__name__, static_folder='static')
@@ -19,21 +22,15 @@ def add():
     new_note = request.form.get("Note")
     priority = request.form.get("Priority")
     tag = request.form.get("Tag")
-    notes.append(Note(data = new_note, priority = priority, tag = tag))
-
-    med_idx = 0
-    low_idx = 0
-    for i in range(len(notes)):
-        if notes[i].get_priority() == "High":
-            notes[0], notes[i]= notes[i], notes[0]
-            med_idx += 1
-            low_idx += 1
-        elif notes[i].get_priority() == "Medium":
-            notes[med_idx], notes[i]= notes[i], notes[med_idx]
-            low_idx += 1
-        else:
-            notes[low_idx], notes[i]= notes[i], notes[low_idx]
-    print(notes)
+    current_note = 0
+    if len(notes) == 0:
+        notes.append(Note(data = new_note, priority = priority, tag = tag))
+        return redirect(url_for("index"))
+    else:
+        while (priority_level[priority] < priority_level[notes[current_note].get_priority()]):
+            print(priority, notes[current_note].get_priority())
+            current_note += 1
+        notes.insert(current_note, Note(data = new_note, priority = priority, tag = tag))
     return redirect(url_for("index"))
 
 @app.route("/click/<int:idx>/", methods=["POST"])

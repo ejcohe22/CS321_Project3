@@ -31,7 +31,7 @@ class Note:
 
     def get_priority(self):
         if self.priority is None:
-            return "low"
+            return "Low"
         else:
             return self.priority
 
