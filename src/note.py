@@ -25,6 +25,7 @@ class Note:
 
 
     def set_status(self, completed):
+        print(completed)
         self.done = completed
 
 

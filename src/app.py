@@ -5,13 +5,13 @@ import datetime
 
 notes = []
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 @app.route("/")
 def index():
     user = {'username' : 'Aidan' }
     time = datetime.datetime.now()
     time = time.strftime("%B %d, %Y %I:%M %p")
-    return render_template("base.html", title="home", user=user, notes = notes, time = time)
+    return render_template("base.html", title="home", user=user, notes = notes, time = time, audio_file="Pagodes.mp3")
 
 
 @app.route("/add", methods=["POST"])
@@ -39,8 +39,15 @@ def add():
 @app.route("/delete/<int:idx>/", methods=["POST"])
 
 def delete(idx):
-    print("Removing" + str(idx))
-    notes.pop(idx)
+    print("Removing " + str(idx))
+    #notes.pop(idx)
+    return redirect(url_for("index"))
+
+@app.route("/done/<int:idx>/", methods=["POST"])
+
+def done(idx):
+    print("changing status " + str(idx))
+    notes[idx].set_status(not notes[idx].get_status())
     return redirect(url_for("index"))
 
 if __name__ == "__main__":

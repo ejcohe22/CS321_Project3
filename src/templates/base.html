@@ -1,45 +1,68 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+      /* override Bootstraps style above */ 
+      .bg-secondary {background-color: rgb(104, 104, 104, .8) !important; }
+      .bg-danger { background-color: rgba(223, 32, 32, .8) !important; }
+      .bg-warning { background-color: rgb(255, 197, 37, .8) !important; }
+      .bg-success { background-color: rgb(32, 160, 0, .8) !important; }
+      body{ background-image: url('https://pa1.narvii.com/7625/633271bb84b95b2df411b0903e9ddcd9a8897fbbr1-888-497_hq.gif');
+            background-size: cover;
+            height: 100vh;
+            padding:0;
+            margin:0;
+      }
+    </style>
+  </head>
 
+    
 <nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand mb-0 h1">Note Taking App</span>
+  <span class="navbar-brand mb-0 h1">Note Taking App in the Zen Mode</span>
 
-    <div>{{time}}</div>
-  </nav>
-  
+  <div>{{time}}</div>
+</nav>
+
 <form class="input-group mb-2 mx-5 my-1 pr-1" action="/add" method="post">
-    <div class="input-group-prepend">
-      <button class="btn btn-outline-secondary mt-2" type="submit">Add</button>
-    </div>
-    <input type="text" name = "Note" placeholder="Add a Note" class="form-control col-md-7 mt-2">
-    <input type="text" name = "Tag" placeholder="Add a Tag" class="form-control col-md-2 mt-2">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary mt-2" type="submit">Add</button>
+  </div>
+  <input type="text" name = "Note" placeholder="Add a Note" class="form-control col-md-7 mt-2">
+  <input type="text" name = "Tag" placeholder="Add a Tag" class="form-control col-md-2 mt-2">
 
-    <input class="mx-1 my-3 py-2" type="radio" id="High" name="Priority" value="High" >
-    <label class="my-1 py-2" for="High">High</label><br>
-    <input class="mx-1 my-3 py-2"type="radio" id="Medium" name="Priority" value="Medium" >
-    <label class="my-1 py-2" for="Medium">Medium</label><br>
-    <input class="mx-1 my-3 py-2"type="radio" id="Low" name="Priority" value="Low" >
-    <label class="my-1 py-2" for="Low">Low</label>
+  <input class="mx-1 my-3 py-2" type="radio" id="High" name="Priority" value="High" >
+  <label class="my-1 py-2" for="High">High</label><br>
+  <input class="mx-1 my-3 py-2"type="radio" id="Medium" name="Priority" value="Medium" >
+  <label class="my-1 py-2" for="Medium">Medium</label><br>
+  <input class="mx-1 my-3 py-2"type="radio" id="Low" name="Priority" value="Low" >
+  <label class="my-1 py-2" for="Low">Low</label>
 
 </form>
 
 <div class="list-group">
-  <div class="text-center list-group-item bg-secondary border-secondary active ml-4 mr-4">
-    Active Notes
-  </div>
-    {% for note in notes %}
-    {% if note.get_priority() == "High" %}
-      <form class = "row ml-4 mr-4 list-group-item bg-danger opacity-25"></form> action = "/delete/{{loop.index0}}/" method = "post">
-    {% elif note.get_priority() == "Medium" %}
-      <form class = "row ml-4 mr-4 list-group-item bg-warning opacity-25" action = "/delete/{{loop.index0}}/" method = "post">
-    {% else %}
-      <form class = "row ml-4 mr-4 list-group-item opacity-25 bg-success" action = "/delete/{{loop.index0}}/" method = "post">
-    {% endif %}
+<div class="text-center list-group-item bg-secondary border-secondary active ml-4 mr-4">
+  Active Notes
+</div>
+  {% for note in notes %} <!---    action = "/done/{{loop.index0}}/"  -->
+  {% if note.get_status() == True %}
+    <form class = "row ml-4 mr-4 list-group-item bg-secondary" action = "/delete/{{loop.index0}}/" method = "post">
+  {% elif note.get_priority() == "High" %}
+    <form class = "row ml-4 mr-4 list-group-item bg-danger" action = "/delete/{{loop.index0}}/"  method = "post">
+  {% elif note.get_priority() == "Medium" %}
+    <form class = "row ml-4 mr-4 list-group-item bg-warning" action = "/delete/{{loop.index0}}/" method = "post">
+  {% else %}
+    <form class = "row ml-4 mr-4 list-group-item bg-success" action = "/delete/{{loop.index0}}/" method = "post">
+  {% endif %}
+</html>
+
+
     <html>
       <head></head>
       <body>
           <div style="width: 100%;">
               <div style="width: 77%; height: 30px; float: left;"> 
-                <div>---------------------------------------------------------------------------------------------------------------------------</div>
+                <div>-------------------------------------------------------------------------------------------------</div>
               </div>
               <div style="margin-left: 77%; height: 30px;"> 
                 {{note.get_time()}}
@@ -55,7 +78,7 @@
         </div>
         <div style="width: 100%;">
           <div style="width: 77%; height: 10px; float: left;"> 
-            <div>---------------------------------------------------------------------------------------------------------------------------</div>
+            <div>-------------------------------------------------------------------------------------------------</div>
           </div>
           <div style="margin-left: 50%; height: 10px;"> 
             <p class="text-bottom"> Tag: {{note.get_tag()}}</p>
@@ -63,8 +86,11 @@
       </div>
       </body>
       </html>
-          <button type="button" class = "m-2 col-md-1 btn btn-outline-light float-right">Done</button>
+          <button type="submit" class = "m-2 col-md-1 btn btn-outline-light float-right" action = "/done/{{loop.index0}}/">Done</button>
           <button type="submit" class = "m-2 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>
       {% endfor %}
+      <audio controls loop  id="playAudio">
+        <source src= {{ url_for('static', filename = audio_file) }} type="audio/mp3">
+        </audio>
   </div>
