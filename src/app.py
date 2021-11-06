@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect
-from note import Note
+from src.note import Note
 import datetime
 
 
@@ -34,7 +34,6 @@ def add():
     return redirect(url_for("index"))
 
 @app.route("/click/<int:idx>/", methods=["POST"])
-
 def click(idx):
     #delete
     if request.form["submit_button"] == "Delete":
