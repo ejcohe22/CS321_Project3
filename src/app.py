@@ -1,28 +1,7 @@
 from flask import Flask, g, render_template, request, url_for, redirect
-from note import Note
+from src.note import Note
 import datetime
-'''
-from os import environ
-from flask_oidc import OpenIDConnect
-from okta.client import Client as UsersClient
-#Heroku database
-import os
-import psycopg2
 
-import os
-
-
-class Config(object):
-    OIDC_CLIENT_SECRETS = "./openidconnect_secrets.json"
-    OIDC_COOKIE_SECURE = False
-    OIDC_CALLBACK_ROUTE = "/oidc/callback"
-    OIDC_SCOPES = ["openid", "email", "profile"]
-    OIDC_ID_TOKEN_COOKIE_NAME = "oidc_token"
-
-DATABASE_URL = "postgres://yydekggijkpihj:75195cfed1455935c44a15fd86abae7726e6dcb54734eca16105c8983c635492@ec2-18-214-214-252.compute-1.amazonaws.com:5432/d63hvu45thv45v"
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-'''
 
 global priority_level
 global notes
@@ -30,20 +9,6 @@ priority_level = {"High":2, "Medium":1, "Low":0, None:0}
 notes = []
 
 app = Flask(__name__, static_folder='static')
-'''
-# instantiate OpenID client to handle user session
-oidc = OpenIDConnect(app)
-# Okta client will determine if a user has an appropriate account
-okta_client = UsersClient(environ.get("OKTA_ORG_URL"),
-                          environ.get("OKTA_AUTH_TOKEN"))
-
-@app.before_request
-def before_request():
-    if oidc.user_loggedin:
-        g.user = okta_client.get_user(oidc.user_getfield("sub"))
-    else:
-        g.user = None
-'''
 @app.route("/")
 def index():
     user = {'username' : 'Aidan' }
@@ -69,12 +34,12 @@ def add():
     return redirect(url_for("index"))
 
 @app.route("/click/<int:idx>/", methods=["POST"])
+
 def click(idx):
     #delete
     if request.form["submit_button"] == "Delete":
         print("Removing " + str(idx))
-        if len(notes) > 0 :
-            notes.pop(idx)
+        notes.pop(idx)
         return redirect(url_for("index"))
     #status
     elif request.form["submit_button"] == "Done":
