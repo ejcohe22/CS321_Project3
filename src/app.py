@@ -54,19 +54,18 @@ def index():
 
 @app.route("/add", methods=["POST"])
 def add():
-    if request.form["submit_button"] == "Add":
-        new_note = request.form.get("Note")
-        priority = request.form.get("Priority")
-        tag = request.form.get("Tag")
-        current_note = 0
-        if len(notes) == 0:
-            notes.append(Note(data = new_note, priority = priority, tag = tag))
-            return redirect(url_for("index"))
-        else:
-            while (priority_level[priority] < priority_level[notes[current_note].get_priority()]):
-                print(priority, notes[current_note].get_priority())
-                current_note += 1
-            notes.insert(current_note, Note(data = new_note, priority = priority, tag = tag))
+    new_note = request.form.get("Note")
+    priority = request.form.get("Priority")
+    tag = request.form.get("Tag")
+    current_note = 0
+    if len(notes) == 0:
+        notes.append(Note(data = new_note, priority = priority, tag = tag))
+        return redirect(url_for("index"))
+    else:
+        while (priority_level[priority] < priority_level[notes[current_note].get_priority()]):
+            print(priority, notes[current_note].get_priority())
+            current_note += 1
+        notes.insert(current_note, Note(data = new_note, priority = priority, tag = tag))
     return redirect(url_for("index"))
 
 @app.route("/click/<int:idx>/", methods=["POST"])
