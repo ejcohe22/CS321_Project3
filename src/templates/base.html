@@ -71,7 +71,6 @@
       <body>
           <div style="width: 100%;">
               <div style="width: 68%; height: 30px; float: left;"> 
-                <div>-------------------------------------------------------------------------------------------------</div>
               </div>
               <div style="margin-left: 40%; height: 30px;"> 
                 {{note.get_time()}}
@@ -87,7 +86,6 @@
         </div>
         <div style="width: 100%;">
           <div style="width: 68%; height: 5px; float: left;"> 
-            <div>-------------------------------------------------------------------------------------------------</div>
           </div>
           <div style="margin-left: 40%; height: 5px;"> 
             <p class="text-bottom"> Tag: {{note.get_tag()}}</p>
@@ -95,7 +93,11 @@
       </div>
       </body>
       </html>
+          {% if note.get_status() == True %}
+          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Not Finished</button>
+          {% else %}
           <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Done</button>
+          {% endif %}
           <button type="submit" name="submit_button" value="Delete" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>
       {% endfor %}

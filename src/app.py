@@ -27,7 +27,7 @@ def add():
         notes.append(Note(data = new_note, priority = priority, tag = tag))
         return redirect(url_for("index"))
     else:
-        while (priority_level[priority] < priority_level[notes[current_note].get_priority()]):
+        while current_note < len(notes) and (priority_level[priority] < priority_level[notes[current_note].get_priority()]):
             print(priority, notes[current_note].get_priority())
             current_note += 1
         notes.insert(current_note, Note(data = new_note, priority = priority, tag = tag))
@@ -45,6 +45,9 @@ def click(idx):
     elif request.form["submit_button"] == "Done":
         print("changing status " + str(idx))
         notes[idx].set_status(not notes[idx].get_status())
+        notes.append(notes[idx])
+        notes.pop(idx)
+
         return redirect(url_for("index"))
     else:
         return redirect(url_for("index"))
