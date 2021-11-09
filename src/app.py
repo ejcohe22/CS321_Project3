@@ -1,7 +1,8 @@
-# Flask + DB
+# Flask 
 from flask import Flask, render_template, request, url_for, redirect
 # Helper File
-from note import * # Note, OS, datetime, timezone
+import datetime
+from note import Note
 
 global priority_level
 global notes
