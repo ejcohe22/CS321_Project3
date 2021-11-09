@@ -94,9 +94,9 @@
       </body>
       </html>
           {% if note.get_status() == True %}
-          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Not Finished</button>
+          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Incomplete</button>
           {% else %}
-          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Done</button>
+          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Complete</button>
           {% endif %}
           <button type="submit" name="submit_button" value="Delete" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>
