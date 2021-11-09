@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, url_for, redirect
 # Helper File
 import datetime
-from note import Note
+from src.note import Note
 
 global priority_level
 global notes
