@@ -11,7 +11,7 @@ notes = []
 
 app = Flask(__name__, static_folder='static')
 
-ENV = '' #'dev'
+ENV = 'dev'
 if ENV == 'dev':
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
