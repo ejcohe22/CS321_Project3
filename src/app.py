@@ -28,7 +28,6 @@ def add():
     priority = request.form.get("Priority")
     tag = request.form.get("Tag")
     current_note = 0
-    time.sleep(100)
     if len(notes) == 0:
         notes.append(Note(data = new_note, priority = priority, tag = tag))
         return redirect(url_for("index"))
@@ -41,7 +40,6 @@ def add():
 @app.route("/click/<int:idx>/", methods=["POST"])
 
 def click(idx):
-    time.sleep(100)
     #delete
     if request.form["submit_button"] == "Delete" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
         print("Removing " + str(idx))
