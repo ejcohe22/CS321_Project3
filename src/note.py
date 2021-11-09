@@ -1,13 +1,14 @@
 # note.py *** a data class ***
 # isolates note information and privatizes the note creation time data.
-from datetime import datetime
+
+import datetime
 
 
 class Note:
     def __init__(self, data, priority, tag):
         self.done = False
         self.data = data
-        self.day_time = datetime.now()
+        self.day_time = datetime.datetime.utcnow() - datetime.timedelta(hours=5)
         self.priority = priority
         self.tag = tag
     

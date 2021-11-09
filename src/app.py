@@ -1,8 +1,10 @@
-# Flask + DB
-from flask import Flask, g, render_template, request, url_for, redirect
-from datetime import datetime
+# Flask 
+from flask import Flask, render_template, request, url_for, redirect
+# Helper File
+import datetime
 from src.note import Note
 from src.notes import Notes
+
 
 priority_level = {"High":2, "Medium":1, "Low":0, None:0}
 notes = Notes()
@@ -11,7 +13,7 @@ app = Flask(__name__, static_folder='static')
 @app.route("/")
 def index():
     user = {'username' : 'Aidan' }
-    time = datetime.now()
+    time = datetime.datetime.utcnow() - datetime.timedelta(hours=5)
     time = time.strftime("%B %d, %Y %I:%M %p")
     # print("note size: ", len(notes))
     return render_template("base.html", title="home", user=user, notes = notes.get_all(), time = time)
@@ -37,12 +39,12 @@ def add():
 
 def click(idx):
     #delete
-    if request.form["submit_button"] == "Delete":
+    if request.form["submit_button"] == "Delete" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
         print("Removing " + str(idx))
         notes.remove(idx)
         return redirect(url_for("index"))
     #status
-    elif request.form["submit_button"] == "Done":
+    elif request.form["submit_button"] == "Done" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
         print("changing status " + str(idx))
         notes.get_one(idx).set_status(not notes.get_one(idx).get_status())
         notes.add(notes.get_one(idx))
