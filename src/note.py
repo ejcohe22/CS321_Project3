@@ -1,15 +1,13 @@
 # note.py *** a data class ***
 # isolates note information and privatizes the note creation time data.
 from datetime import datetime
-from pytz import timezone
-import os
 
 
 class Note:
     def __init__(self, data, priority, tag):
         self.done = False
         self.data = data
-        self.day_time = datetime.now(timezone('US/Eastern'))
+        self.day_time = datetime.now()
         self.priority = priority
         self.tag = tag
     
