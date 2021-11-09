@@ -1,6 +1,7 @@
 # note.py *** a data class ***
 # isolates note information and privatizes the note creation time data.
 import datetime
+import os
 
 
 class Note:

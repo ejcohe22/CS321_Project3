@@ -69,34 +69,22 @@
     <html>
       <head></head>
       <body>
-          <div style="width: 100%;">
-              <div style="width: 68%; height: 30px; float: left;"> 
+          <div style="width: 100%; height: 100%">
+              <div style="width: 60%; height: 100%; float: left; word-wrap: normal;">
+                {{note.get_data()}}
               </div>
-              <div style="margin-left: 40%; height: 30px;"> 
-                {{note.get_time()}}
+              <div style="margin-left: 77%; height: 70px;"> 
+                {{note.get_time()}}<br>
+                Priority: {{note.get_priority()}}<br>
+                Tag: {{note.get_tag()}}<br>
               </div>
-          </div>
-          <div style="width: 100%;">
-            <div style="width: 68%; height: 50px; float: left;"> 
-              <div><td class="align-top">{{note.get_data()}}</td></div>
             </div>
-            <div style="margin-left: 40%; height: 30px;"> 
-              <p class="text-bottom"> Priority: {{note.get_priority()}}</p>
-            </div>
-        </div>
-        <div style="width: 100%;">
-          <div style="width: 68%; height: 5px; float: left;"> 
-          </div>
-          <div style="margin-left: 40%; height: 5px;"> 
-            <p class="text-bottom"> Tag: {{note.get_tag()}}</p>
-          </div>
-      </div>
       </body>
       </html>
           {% if note.get_status() == True %}
-          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Incomplete</button>
+          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Uncheck</button>
           {% else %}
-          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Complete</button>
+          <button type="submit" name="submit_button" value="Done" class = "m-1 col-md-1 btn btn-outline-light float-right" >Check</button>
           {% endif %}
           <button type="submit" name="submit_button" value="Delete" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>

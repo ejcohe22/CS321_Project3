@@ -1,8 +1,8 @@
+# Flask + DB
 from flask import Flask, g, render_template, request, url_for, redirect
-import os
-from src.note import Note
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+# Helper File
+from note import * # Note, OS, datetime
 
 global priority_level
 global notes
@@ -10,18 +10,19 @@ priority_level = {"High":2, "Medium":1, "Low":0, None:0}
 notes = [] 
 
 app = Flask(__name__, static_folder='static')
-ENV = 'dev'
 
+ENV = '' #'dev'
 if ENV == 'dev':
     app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI'] 
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 else:
     app.debug = False
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
+'''
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
@@ -31,7 +32,7 @@ class User(db.Model):
     def __init__(self, name, notes):
         self.name = name
         self.notes = notes
-
+'''
 
 @app.route("/")
 def index():
