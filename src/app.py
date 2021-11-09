@@ -15,21 +15,24 @@ def index():
     user = {'username' : 'Aidan' }
     time = datetime.datetime.now()
     time = time.strftime("%B %d, %Y %I:%M %p")
+    print("note size: ", len(notes))
     return render_template("base.html", title="home", user=user, notes = notes, time = time, audio_file="Pagodes.mp3")
 
 
 @app.route("/add", methods=["POST"])
 def add():
+    
     new_note = request.form.get("Note")
     priority = request.form.get("Priority")
     tag = request.form.get("Tag")
     current_note = 0
     if len(notes) == 0:
+        print("add_first")
         notes.append(Note(data = new_note, priority = priority, tag = tag))
         return redirect(url_for("index"))
     else:
         while current_note < len(notes) and (priority_level[priority] < priority_level[notes[current_note].get_priority()]):
-            print(priority, notes[current_note].get_priority())
+            print("addded")
             current_note += 1
         notes.insert(current_note, Note(data = new_note, priority = priority, tag = tag))
     return redirect(url_for("index"))
@@ -39,11 +42,13 @@ def add():
 def click(idx):
     #delete
     if request.form["submit_button"] == "Delete":
+        print("click_delete")
         print("Removing " + str(idx))
         notes.pop(idx)
         return redirect(url_for("index"))
     #status
     elif request.form["submit_button"] == "Done":
+        print("click_status")
         print("changing status " + str(idx))
         notes[idx].set_status(not notes[idx].get_status())
         notes.append(notes[idx])
@@ -51,6 +56,7 @@ def click(idx):
 
         return redirect(url_for("index"))
     else:
+        print("click_unmet")
         return redirect(url_for("index"))
 
 
