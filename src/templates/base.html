@@ -24,6 +24,7 @@
         color: rgb(88, 88, 88);
       }
       </style>
+      link rel="icon" href="data:,">
   </head>
 
     
@@ -67,7 +68,7 @@
 
 
     <html>
-      <head></head>
+      <head>link rel="icon" href="data:,"></head>
       <body>
           <div style="width: 100%; height: 100%">
               <div style="width: 60%; height: 100%; float: left; word-wrap: normal;">
@@ -89,8 +90,10 @@
           <button type="submit" name="submit_button" value="Delete" class = "m-1 col-md-1 btn btn-outline-light float-right" >Delete</button>
         </form>
       {% endfor %}
+
+      <!--
       <audio controls loop  id="playAudio">
-        <source src= {{ url_for('static', filename = audio_file) }} type="audio/mp3">
+        <source src= {{ url_for('static', filename = "Pagodes.mp3") }} type="audio/mp3">
         </audio>
 
         
@@ -103,3 +106,4 @@
           <a href="https://www.youtube.com/watch?v=lswHSnJ0Rlw">Debussy, Estampes (1903) - 1. Pagodes" performed by Claudio Arrau</a>
           </div>
   </div>
+  -->

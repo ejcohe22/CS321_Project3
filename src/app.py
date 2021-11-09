@@ -1,7 +1,7 @@
 # Flask + DB
 from flask import Flask, render_template, request, url_for, redirect
 # Helper File
-from src.note import * # Note, OS, datetime
+from note import * # Note, OS, datetime, timezone
 
 global priority_level
 global notes
@@ -13,10 +13,10 @@ app = Flask(__name__, static_folder='static')
 @app.route("/")
 def index():
     user = {'username' : 'Aidan' }
-    time = datetime.datetime.now()
+    time = datetime.now(timezone('US/Eastern'))
     time = time.strftime("%B %d, %Y %I:%M %p")
     print("note size: ", len(notes))
-    return render_template("base.html", title="home", user=user, notes = notes, time = time, audio_file="Pagodes.mp3")
+    return render_template("base.html", title="home", user=user, notes = notes, time = time)
 
 
 @app.route("/add", methods=["POST"])
