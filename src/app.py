@@ -4,14 +4,19 @@ from flask_sqlalchemy import SQLAlchemy
 # Helper File
 import datetime
 from note import Note
+import os
 
 
 global priority_level
 priority_level = {"High":2, "Medium":1, "Low":0, None:0}
 
 app = Flask(__name__, static_folder='static')
+env = 'dev'
+if env == 'dev':
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
 db = SQLAlchemy(app)
 
