@@ -2,7 +2,7 @@
 from flask import Flask, g, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 # Helper File
-from note import * # Note, OS, datetime
+from src.note import * # Note, OS, datetime
 
 global priority_level
 global notes
