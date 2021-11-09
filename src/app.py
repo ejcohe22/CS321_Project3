@@ -41,12 +41,12 @@ def add():
 
 def click(idx):
     #delete
-    if request.form["submit_button"] == "Delete" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
+    if request.form["submit_button"] == "Delete" and idx < len(notes) and idx >= 0 and len(notes) >= 1:
         print("Removing " + str(idx))
         notes.pop(idx)
         return redirect(url_for("index"))
     #status
-    elif request.form["submit_button"] == "Done" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
+    elif request.form["submit_button"] == "Done" and idx < len(notes) and idx >= 0 and len(notes) >= 1:
         print("changing status " + str(idx))
         notes[idx].set_status(not notes[idx].get_status())
         notes.append(notes[idx])
