@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, url_for, redirect
 # Helper File
 import datetime
 from src.note import Note
+import time
+
 
 global priority_level
 global notes
@@ -22,11 +24,11 @@ def index():
 
 @app.route("/add", methods=["POST"])
 def add():
-    
     new_note = request.form.get("Note")
     priority = request.form.get("Priority")
     tag = request.form.get("Tag")
     current_note = 0
+    time.sleep(100)
     if len(notes) == 0:
         notes.append(Note(data = new_note, priority = priority, tag = tag))
         return redirect(url_for("index"))
@@ -39,13 +41,14 @@ def add():
 @app.route("/click/<int:idx>/", methods=["POST"])
 
 def click(idx):
+    time.sleep(100)
     #delete
-    if request.form["submit_button"] == "Delete":
+    if request.form["submit_button"] == "Delete" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
         print("Removing " + str(idx))
         notes.pop(idx)
         return redirect(url_for("index"))
     #status
-    elif request.form["submit_button"] == "Done":
+    elif request.form["submit_button"] == "Done" and idx > len(notes) and idx >= 0 and len(notes) >= 1:
         print("changing status " + str(idx))
         notes[idx].set_status(not notes[idx].get_status())
         notes.append(notes[idx])
