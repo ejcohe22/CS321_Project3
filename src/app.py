@@ -2,7 +2,6 @@
 from flask import Flask, render_template, request, url_for, redirect
 # Helper File
 from note import * # Note, OS, datetime, timezone
-from pytz import timezone
 
 global priority_level
 global notes
@@ -14,7 +13,7 @@ app = Flask(__name__, static_folder='static')
 @app.route("/")
 def index():
     user = {'username' : 'Aidan' }
-    time = datetime.now(timezone('US/Eastern'))
+    time = datetime.datetime.utcnow() - datetime.timedelta(hours=5)
     time = time.strftime("%B %d, %Y %I:%M %p")
     print("note size: ", len(notes))
     return render_template("base.html", title="home", user=user, notes = notes, time = time)
