@@ -1,11 +1,8 @@
 from src.app import *
 from src.note import Note
-from src.notes import Notes
 
 
 website_path = "https://cs321-project3-website.herokuapp.com/"
-
-
 def test_index():
 	with app.test_client() as test_client:
 		response = test_client.get(website_path)
