@@ -13,14 +13,17 @@ def test_add():
 	# creating a post request with data as if coming from form
 	with app.test_client() as test_client:
 		url = website_path + 'add'
-		note = {"data" : "new_note", "priority" : "Medium", "tag" : "tag"}
+		note = {"Note" : "new_note", "Priority" : "crazy_medium", "Tag" : "new_tag"}
 
 		response = test_client.post(url, data=note, follow_redirects=True)
+		#response = test_client.get(website_path)
 		# making sure we got redirected, and the request didn't fail
 		assert response.status_code ==  200 # redirect
 		# making sure the home page now includes the added test data
-		response = test_client.get(website_path)
-		assert b'new_note' in response.data
+		assert "new_note" in response.text
+		assert "new_tag" in response.text
+
+		
 
 
 
