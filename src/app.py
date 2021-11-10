@@ -11,7 +11,7 @@ global priority_level
 priority_level = {"High":2, "Medium":1, "Low":0, None:0}
 
 app = Flask(__name__, static_folder='static')
-env = ''
+env = 'dev'
 if env == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 else:
